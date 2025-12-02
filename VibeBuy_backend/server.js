@@ -1,3 +1,4 @@
+//Pushing from VM3
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -14,7 +15,7 @@ app.use(express.json());
 
 // MongoDB Connection
 // [DATABASE_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Database VM
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/vibebuy';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://100.81.244.102:27017/vibebuy';
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
