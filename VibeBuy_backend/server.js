@@ -1,4 +1,3 @@
-//Pushing from VM3
 const express = require('express');
 const mongoose = require('mongoose');
 const cors = require('cors');
@@ -67,8 +66,8 @@ app.post('/api/register', async (req, res) => {
         });
 
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ message: 'Server error' });
+        console.error('REGISTRATION ERROR:', err);
+        res.status(500).json({ message: 'Server error', error: err.message });
     }
 });
 
