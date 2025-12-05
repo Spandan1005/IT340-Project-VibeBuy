@@ -9,12 +9,21 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 // Middleware
-app.use(cors());
+const corsOptions = {
+    origin: [
+        'http://localhost:4200',   // Angular dev server on your laptop
+    ],
+    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
+    credentials: true
+};
+
+app.use(cors(corsOptions));
 app.use(express.json());
 
+
 // MongoDB Connection
-// [DATABASE_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Database VM
-const mongoURI = process.env.MONGODB_URI || 'mongodb://100.81.244.102:27017/vibebuy';
+// [DATABASE_VM_IP_ADDRESS]: Replace <DB_VM_IP> with the actual IP address of your MongoDB VM
+const mongoURI = process.env.MONGODB_URI || 'mongodb://<DB_VM_IP>:27017/vibebuy'; //12/4/25 PLEASE PUT IN DB IP ADDRESS HERE !!!!!!!!!!!!
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
@@ -162,6 +171,7 @@ app.post('/api/mfa/verify', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
+app.listen(PORT, '0.0.0.0', () => {
+    console.log(`Server running on port ${PORT} and accessible externally`);
 });
+
