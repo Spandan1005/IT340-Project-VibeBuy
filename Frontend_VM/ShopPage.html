@@ -196,44 +196,122 @@
     </div>
 
     <!-- Load Product Data -->
-    <script src="product.js"></script>
+    <script src="products.js"></script>
 
+    <style>
+        .search-container {
+            margin-bottom: 30px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 16px 24px;
+            font-size: 16px;
+            border: 2px solid #e5e7eb;
+            border-radius: 12px;
+            outline: none;
+            transition: all 0.3s;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .search-input:focus {
+            border-color: #a855f7;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+        }
+    </style>
     <script>
         // Get Vibe from URL
         const urlParams = new URLSearchParams(window.location.search);
         const currentVibe = urlParams.get('vibe') || 'Chill Explorer'; // Default
 
-        // Update Header
-        document.getElementById('vibeBadge').textContent = currentVibe;
-        document.getElementById('vibeTitle').textContent = `${currentVibe} Collection`;
+        // Functions to handle display
+        function updateDisplay(productsToShow, title, badgeText) {
+            const badge = document.getElementById('vibeBadge');
+            const titleEl = document.getElementById('vibeTitle');
 
-        // Filter Products
-        const filteredProducts = products.filter(p => p.vibe === currentVibe);
-        const grid = document.getElementById('productGrid');
+            if (currentVibe === 'all') {
+                badge.style.display = 'none';
+                titleEl.textContent = 'All Products';
+            } else {
+                badge.style.display = 'inline-block';
+                badge.textContent = badgeText || currentVibe;
+                titleEl.textContent = title || `${currentVibe} Collection`;
+            }
 
-        if (filteredProducts.length === 0) {
-            grid.innerHTML = `
-                <div class="empty-state">
-                    <h2>No items found for this vibe yet!</h2>
-                    <p>Try "Chill Explorer" or "Cyber Punk".</p>
-                </div>
-            `;
-        } else {
-            // Render Products
-            grid.innerHTML = filteredProducts.map(product => `
-                <div class="product-card">
-                    <img src="${product.image}" alt="${product.name}" class="product-image">
-                    <div class="product-info">
-                        <h3 class="product-name">${product.name}</h3>
-                        <p class="product-desc">${product.description}</p>
-                        <div class="product-footer">
-                            <span class="product-price">$${product.price.toFixed(2)}</span>
-                            <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart</button>
+            renderProducts(productsToShow);
+        }
+
+        function renderProducts(productsToRender) {
+            const grid = document.getElementById('productGrid');
+
+            if (productsToRender.length === 0) {
+                grid.innerHTML = `
+                    <div class="empty-state">
+                        <h2>No items found matching your search!</h2>
+                        <p>Try a different keyword.</p>
+                    </div>
+                `;
+            } else {
+                grid.innerHTML = productsToRender.map(product => `
+                    <div class="product-card">
+                        <img src="${product.image}" alt="${product.name}" class="product-image">
+                        <div class="product-info">
+                            <h3 class="product-name">${product.name}</h3>
+                            <p class="product-desc">${product.description}</p>
+                            <div class="product-footer">
+                                <span class="product-price">$${product.price.toFixed(2)}</span>
+                                <button class="btn-add" onclick="alert('Added to cart!')">Add to Cart</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `).join('');
+            }
         }
+
+        // Initialize Page
+        let activeProducts = [];
+
+        if (currentVibe === 'all') {
+            activeProducts = products;
+            updateDisplay(activeProducts);
+        } else {
+            activeProducts = products.filter(p => p.vibe === currentVibe);
+            updateDisplay(activeProducts);
+        }
+
+        // Search functionality
+        function handleSearch(query) {
+            const searchTerm = query.toLowerCase().trim();
+
+            if (!searchTerm) {
+                renderProducts(activeProducts);
+                return;
+            }
+
+            // Safe client-side filtering
+            const filtered = activeProducts.filter(product => {
+                return product.name.toLowerCase().includes(searchTerm) ||
+                    product.description.toLowerCase().includes(searchTerm);
+            });
+
+            renderProducts(filtered);
+        }
+
+        // Add Search UI
+        const headerContainer = document.querySelector('.vibe-header');
+        const searchContainer = document.createElement('div');
+        searchContainer.className = 'search-container';
+        searchContainer.innerHTML = `
+            <input type="text" 
+                   class="search-input" 
+                   placeholder="Search for items..." 
+                   oninput="handleSearch(this.value)">
+        `;
+        headerContainer.appendChild(searchContainer);
+
     </script>
 </body>
 

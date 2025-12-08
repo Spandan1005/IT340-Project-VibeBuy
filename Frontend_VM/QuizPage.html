@@ -488,6 +488,55 @@
 
         // Initialize Progress
         progressBar.style.width = '0%';
+
+        // Login Check
+        window.addEventListener('DOMContentLoaded', function () {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                // Create and show modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    backdrop-filter: blur(5px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                    animation: fadeIn 0.3s ease;
+                `;
+
+                modal.innerHTML = `
+                    <div style="background: white; padding: 40px; border-radius: 24px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">🔒</div>
+                        <h2 style="margin-bottom: 12px; font-size: 24px;">Please Login First</h2>
+                        <p style="color: #666; margin-bottom: 32px; line-height: 1.5;">To get your personalized vibe reading, we need to know who you are!</p>
+                        <button onclick="window.location.href='LoginPage.html'" style="
+                            background: linear-gradient(135deg, #a855f7, #ec4899);
+                            color: white;
+                            border: none;
+                            padding: 14px 32px;
+                            border-radius: 12px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            width: 100%;
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">Log In / Sign Up</button>
+                    </div>
+                `;
+
+                document.body.appendChild(modal);
+
+                // Prevent interaction with background
+                document.querySelector('.quiz-container').style.filter = 'blur(5px)';
+                document.querySelector('.quiz-container').style.pointerEvents = 'none';
+            }
+        });
     </script>
 </body>
 
