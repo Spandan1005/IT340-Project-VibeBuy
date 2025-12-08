@@ -8,9 +8,12 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+const mongoSanitize = require('express-mongo-sanitize');
+
 // Middleware
 app.use(cors());
 app.use(express.json());
+app.use(mongoSanitize());
 
 // MongoDB Connection
 // [DATABASE_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Database VM
@@ -29,7 +32,7 @@ app.post('/api/register', async (req, res) => {
         const { name, email, password } = req.body;
 
         // Validation
-        if (!name || !email || !password) {
+        if (!name || !email || !password || typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string') {
             return res.status(400).json({ message: 'Please enter all fields' });
         }
 
@@ -75,6 +78,11 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        // Additional Validation
+        if (typeof email !== 'string' || typeof password !== 'string') {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
 
         // Check for user
         const user = await User.findOne({ email });
