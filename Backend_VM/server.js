@@ -8,22 +8,16 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
+// const mongoSanitize = require('express-mongo-sanitize');
+
 // Middleware
-const corsOptions = {
-    origin: [
-        'http://localhost:4200',   // Angular dev server on your laptop
-    ],
-    methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true
-};
-
-app.use(cors(corsOptions));
+app.use(cors());
 app.use(express.json());
-
+// app.use(mongoSanitize());
 
 // MongoDB Connection
-// [DATABASE_VM_IP_ADDRESS]: Replace <DB_VM_IP> with the actual IP address of your MongoDB VM
-const mongoURI = process.env.MONGODB_URI || 'mongodb://<DB_VM_IP>:27017/vibebuy'; //12/4/25 PLEASE PUT IN DB IP ADDRESS HERE !!!!!!!!!!!!
+// [DATABASE_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Database VM
+const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/vibebuy';
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
@@ -38,7 +32,7 @@ app.post('/api/register', async (req, res) => {
         const { name, email, password } = req.body;
 
         // Validation
-        if (!name || !email || !password) {
+        if (!name || !email || !password || typeof name !== 'string' || typeof email !== 'string' || typeof password !== 'string') {
             return res.status(400).json({ message: 'Please enter all fields' });
         }
 
@@ -84,6 +78,11 @@ app.post('/api/register', async (req, res) => {
 app.post('/api/login', async (req, res) => {
     try {
         const { email, password } = req.body;
+
+        // Additional Validation
+        if (typeof email !== 'string' || typeof password !== 'string') {
+            return res.status(400).json({ message: 'Invalid credentials' });
+        }
 
         // Check for user
         const user = await User.findOne({ email });
@@ -171,7 +170,6 @@ app.post('/api/mfa/verify', async (req, res) => {
         res.status(500).json({ message: 'Server error' });
     }
 });
-app.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on port ${PORT} and accessible externally`);
+app.listen(PORT, () => {
+    console.log(`Server running on port ${PORT}`);
 });
-
