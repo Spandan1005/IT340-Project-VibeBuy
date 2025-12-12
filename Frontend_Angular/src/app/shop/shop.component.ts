@@ -2,11 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Product, ProductService } from '../products.service';
+import { LogClickDirective } from '../log-click.directive';
 
 @Component({
     selector: 'app-shop',
     standalone: true,
-    imports: [CommonModule],
+    imports: [CommonModule, LogClickDirective],
     templateUrl: './shop.component.html',
     styleUrl: './shop.component.css'
 })
@@ -55,7 +56,5 @@ export class ShopComponent implements OnInit {
         );
     }
 
-    addToCart(product: Product) {
-        alert(`Added ${product.name} to cart!`);
-    }
+    
 }
