@@ -1,0 +1,49 @@
+<div class="register-container">
+    <div class="register-card">
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="#A855F7" />
+                <path d="M16 8L20 12L16 16L12 12L16 8Z" fill="white" />
+                <path d="M16 16L20 20L16 24L12 20L16 16Z" fill="white" />
+            </svg>
+            <span>VibeBuy</span>
+        </div>
+
+        <h2>Create your account</h2>
+        <p class="subtitle">Join thousands of shoppers finding their perfect vibe.</p>
+
+        <form (ngSubmit)="onSubmit()">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input type="text" id="name" [(ngModel)]="name" name="name" placeholder="John Doe" required>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" [(ngModel)]="email" name="email" placeholder="you@example.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" id="password" [(ngModel)]="password" name="password" placeholder="••••••••"
+                    required>
+            </div>
+
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <input type="password" id="confirmPassword" [(ngModel)]="confirmPassword" name="confirmPassword"
+                    placeholder="••••••••" required>
+            </div>
+
+            <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+            <button type="submit" class="btn-primary" [disabled]="isLoading">
+                {{ isLoading ? 'Creating Account...' : 'Sign Up' }}
+            </button>
+        </form>
+
+        <p class="login-link">
+            Already have an account? <a routerLink="/auth/login">Log in</a>
+        </p>
+    </div>
+</div>

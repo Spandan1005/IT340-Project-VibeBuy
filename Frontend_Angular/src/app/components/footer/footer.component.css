@@ -1,0 +1,11 @@
+/* Footer */
+footer {
+    background: #1a1a1a;
+    color: white;
+    padding: 40px 60px;
+    text-align: center;
+}
+
+footer p {
+    opacity: 0.8;
+}

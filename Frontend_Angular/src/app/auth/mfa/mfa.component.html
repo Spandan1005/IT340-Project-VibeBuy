@@ -1,0 +1,25 @@
+<div class="mfa-container">
+    <div class="mfa-card">
+        <h2>Secure Your Account</h2>
+        <p class="subtitle">Set up Two-Factor Authentication</p>
+
+        <div *ngIf="qrCodeUrl" class="qr-section">
+            <p class="instruction">Scan this QR code with Google Authenticator:</p>
+            <img [src]="qrCodeUrl" alt="MFA QR Code" class="qr-image">
+        </div>
+
+        <div class="verify-section">
+            <p class="instruction">Enter the 6-digit code from your app:</p>
+            <form (ngSubmit)="verify()">
+                <input type="text" [(ngModel)]="token" name="token" placeholder="123456" maxlength="6"
+                    class="token-input" required>
+
+                <div class="error-message" *ngIf="errorMessage">{{ errorMessage }}</div>
+
+                <button type="submit" class="btn-primary" [disabled]="!token || isLoading">
+                    {{ isLoading ? 'Verifying...' : 'Verify' }}
+                </button>
+            </form>
+        </div>
+    </div>
+</div>

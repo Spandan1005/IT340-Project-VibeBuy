@@ -1,0 +1,19 @@
+<header>
+    <nav>
+        <div class="logo">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
+                <circle cx="16" cy="16" r="16" fill="#A855F7" />
+                <path d="M16 8L20 12L16 16L12 12L16 8Z" fill="white" />
+                <path d="M16 16L20 20L16 24L12 20L16 16Z" fill="white" />
+            </svg>
+            <span>VibeBuy</span>
+        </div>
+        <div class="nav-links">
+            <a routerLink="/shop">Shop</a>
+            <a href="#">Categories</a>
+            <a href="#">About</a>
+            <a *ngIf="!isLoggedIn" routerLink="/auth/login" class="btn-login">Login</a>
+            <a *ngIf="isLoggedIn" (click)="logout()" class="btn-login" style="cursor: pointer;">Logout</a>
+        </div>
+    </nav>
+</header>
