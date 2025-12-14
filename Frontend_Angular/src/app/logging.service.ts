@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpBackend } from '@angular/common/http';
 
 export interface LogEntry {
     level: 'INFO' | 'WARN' | 'ERROR';
@@ -16,8 +16,11 @@ export class LoggingService {
     // [DEVOPS_VM_IP]: Replace 'localhost:9000' with actual DevOps VM IP/Port later
     // We assume there's an endpoint /api/logs accepting POST requests
     private devOpsUrl = 'http://localhost:9000/api/logs';
+    private http: HttpClient;
 
-    constructor(private http: HttpClient) { }
+    constructor(handler: HttpBackend) {
+        this.http = new HttpClient(handler);
+    }
 
     log(level: 'INFO' | 'WARN' | 'ERROR', message: string, details?: any) {
         const entry: LogEntry = {

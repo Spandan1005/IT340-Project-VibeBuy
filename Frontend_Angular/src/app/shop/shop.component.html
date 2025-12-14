@@ -22,6 +22,8 @@
                 <p class="product-desc">{{ product.description }}</p>
                 <div class="product-footer">
                     <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
+                    <button class="btn-add" (click)="addToCart(product)"
+                        [appLogClick]="'Add to Cart: ' + product.name">Add to Cart</button>
                 </div>
             </div>
         </div>

@@ -13,6 +13,7 @@ export const routes: Routes = [
     { path: 'auth/login', component: LoginComponent },
     { path: 'auth/register', component: RegisterComponent },
     { path: 'auth/mfa', component: MfaComponent },
+    { path: 'cart', loadComponent: () => import('./cart/cart.component').then(m => m.CartComponent) },
     // Redirect unknown routes to home
     { path: '**', redirectTo: '' }
 ];

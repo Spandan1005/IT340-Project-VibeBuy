@@ -12,6 +12,7 @@
             <a routerLink="/shop">Shop</a>
             <a href="#">Categories</a>
             <a href="#">About</a>
+            <a routerLink="/cart">Cart</a>
             <a *ngIf="!isLoggedIn" routerLink="/auth/login" class="btn-login">Login</a>
             <a *ngIf="isLoggedIn" (click)="logout()" class="btn-login" style="cursor: pointer;">Logout</a>
         </div>

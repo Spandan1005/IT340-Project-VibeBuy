@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Product, ProductService } from '../products.service';
 import { LogClickDirective } from '../log-click.directive';
+import { CartService } from '../cart.service';
 
 @Component({
     selector: 'app-shop',
@@ -19,6 +20,7 @@ export class ShopComponent implements OnInit {
 
     constructor(
         private productService: ProductService,
+        private cartService: CartService,
         private route: ActivatedRoute
     ) { }
 
@@ -56,5 +58,8 @@ export class ShopComponent implements OnInit {
         );
     }
 
-    
+    addToCart(product: Product) {
+        this.cartService.addToCart(product);
+        alert(`Added ${product.name} to cart!`);
+    }
 }
