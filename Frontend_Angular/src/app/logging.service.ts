@@ -15,7 +15,7 @@ export interface LogEntry {
 export class LoggingService {
     // [DEVOPS_VM_IP]: Replace 'localhost:9000' with actual DevOps VM IP/Port later
     // We assume there's an endpoint /api/logs accepting POST requests
-    private devOpsUrl = 'http://localhost:9000/api/logs';
+    private devOpsUrl = 'http://192.168.10.40:9000/api/logs';
     private http: HttpClient;
 
     constructor(handler: HttpBackend) {

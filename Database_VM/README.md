@@ -8,7 +8,7 @@ Host the MongoDB database server.
 ## Setup
 1.  Install MongoDB Community Server.
 2.  Ensure the service is running on port `27017`.
-3.  The connection string used by the Backend VM is: `mongodb://localhost:27017/vibebuy` (assuming local tunneling or same network).
+3.  The connection string used by the Backend VM is: `mongodb://192.168.10.30:27017/vibebuy` (assuming local tunneling or same network).
 
 ## Maintenance
 - Check logs in `C:\Program Files\MongoDB\Server\X.X\log\`

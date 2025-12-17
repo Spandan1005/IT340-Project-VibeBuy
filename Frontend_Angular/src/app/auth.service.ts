@@ -9,7 +9,7 @@ export class AuthService {
     // [BACKEND_VM_IP_ADDRESS]: In production, replace with actual IP. 
     // For local testing relative to localhost, use localhost:5000.
     // When deploying to Frontend VM, this must be the Backend VM IP.
-    private apiUrl = 'http://localhost:5000/api';
+    private apiUrl = 'http://192.168.10.20:5000/api';
 
     private isLoggedInSubject = new BehaviorSubject<boolean>(this.hasToken());
     public isLoggedIn$ = this.isLoggedInSubject.asObservable();
