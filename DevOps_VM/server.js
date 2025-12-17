@@ -3,7 +3,13 @@ const cors = require('cors');
 const app = express();
 const PORT = 9000;
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://192.168.10.10:4200',
+  methods: ['POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type']
+}));
+
+app.options('*', cors());
 app.use(express.json());
 
 // Log Collector Endpoint
