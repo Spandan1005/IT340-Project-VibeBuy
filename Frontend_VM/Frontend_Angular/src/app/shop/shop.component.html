@@ -1,0 +1,31 @@
+<div class="container">
+    <div class="vibe-header">
+        <div class="vibe-badge" *ngIf="currentVibe !== 'all'">{{ currentVibe }}</div>
+        <h1>{{ headerTitle }}</h1>
+        <p>Hand-picked items that perfectly match your energy.</p>
+
+        <div class="search-container">
+            <input type="text" class="search-input" placeholder="Search for items..." (input)="handleSearch($event)">
+        </div>
+    </div>
+
+    <div class="product-grid">
+        <div class="empty-state" *ngIf="filteredProducts.length === 0">
+            <h2>No items found matching your search!</h2>
+            <p>Try a different keyword.</p>
+        </div>
+
+        <div class="product-card" *ngFor="let product of filteredProducts">
+            <img [src]="product.image" [alt]="product.name" class="product-image">
+            <div class="product-info">
+                <h3 class="product-name">{{ product.name }}</h3>
+                <p class="product-desc">{{ product.description }}</p>
+                <div class="product-footer">
+                    <span class="product-price">${{ product.price | number:'1.2-2' }}</span>
+                    <button class="btn-add" (click)="addToCart(product)"
+                        [appLogClick]="'Add to Cart: ' + product.name">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

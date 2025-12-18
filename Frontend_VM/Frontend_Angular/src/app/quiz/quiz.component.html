@@ -1,0 +1,173 @@
+<div class="quiz-container">
+    <div class="progress-bar">
+        <div class="progress-fill" [style.width.%]="progress"></div>
+    </div>
+
+    <div class="quiz-content">
+        <div *ngIf="!showResult">
+            <!-- Question 1 -->
+            <div class="question-step" *ngIf="currentStep === 1">
+                <h2>How are you feeling right now?</h2>
+                <p class="subtitle">Let's start with your current mood.</p>
+                <div class="options-grid">
+                    <label class="option-card" [class.selected]="answers['q1'] === 'chill'"
+                        (click)="selectOption('q1', 'chill')">
+                        <span class="option-icon">😌</span>
+                        <span class="option-label">Chill & Relaxed</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q1'] === 'energetic'"
+                        (click)="selectOption('q1', 'energetic')">
+                        <span class="option-icon">⚡</span>
+                        <span class="option-label">Energetic</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q1'] === 'focused'"
+                        (click)="selectOption('q1', 'focused')">
+                        <span class="option-icon">🎯</span>
+                        <span class="option-label">Focused</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q1'] === 'adventurous'"
+                        (click)="selectOption('q1', 'adventurous')">
+                        <span class="option-icon">🏔️</span>
+                        <span class="option-label">Adventurous</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 2 -->
+            <div class="question-step" *ngIf="currentStep === 2">
+                <h2>Pick your ideal weekend activity</h2>
+                <p class="subtitle">What sounds like the most fun?</p>
+                <div class="options-grid">
+                    <label class="option-card" [class.selected]="answers['q2'] === 'nature'"
+                        (click)="selectOption('q2', 'nature')">
+                        <span class="option-icon">🌲</span>
+                        <span class="option-label">Hiking in Nature</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q2'] === 'gaming'"
+                        (click)="selectOption('q2', 'gaming')">
+                        <span class="option-icon">🎮</span>
+                        <span class="option-label">Gaming Marathon</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q2'] === 'social'"
+                        (click)="selectOption('q2', 'social')">
+                        <span class="option-icon">🎉</span>
+                        <span class="option-label">Party with Friends</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q2'] === 'creative'"
+                        (click)="selectOption('q2', 'creative')">
+                        <span class="option-icon">🎨</span>
+                        <span class="option-label">Creative Project</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 3 -->
+            <div class="question-step" *ngIf="currentStep === 3">
+                <h2>Choose an aesthetic</h2>
+                <p class="subtitle">Which color palette speaks to you?</p>
+                <div class="options-grid">
+                    <label class="option-card" [class.selected]="answers['q3'] === 'pastel'"
+                        (click)="selectOption('q3', 'pastel')">
+                        <span class="option-icon">🌸</span>
+                        <span class="option-label">Soft Pastels</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q3'] === 'neon'"
+                        (click)="selectOption('q3', 'neon')">
+                        <span class="option-icon">🌆</span>
+                        <span class="option-label">Cyberpunk Neon</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q3'] === 'earth'"
+                        (click)="selectOption('q3', 'earth')">
+                        <span class="option-icon">🍂</span>
+                        <span class="option-label">Earth Tones</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q3'] === 'mono'"
+                        (click)="selectOption('q3', 'mono')">
+                        <span class="option-icon">🎱</span>
+                        <span class="option-label">Minimalist Mono</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 4 -->
+            <div class="question-step" *ngIf="currentStep === 4">
+                <h2>What's playing in your headphones?</h2>
+                <p class="subtitle">Your soundtrack defines your vibe.</p>
+                <div class="options-grid">
+                    <label class="option-card" [class.selected]="answers['q4'] === 'lofi'"
+                        (click)="selectOption('q4', 'lofi')">
+                        <span class="option-icon">☕</span>
+                        <span class="option-label">Lo-Fi Beats</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q4'] === 'pop'"
+                        (click)="selectOption('q4', 'pop')">
+                        <span class="option-icon">🎤</span>
+                        <span class="option-label">Top 40 Pop</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q4'] === 'rock'"
+                        (click)="selectOption('q4', 'rock')">
+                        <span class="option-icon">🎸</span>
+                        <span class="option-label">Rock / Alt</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q4'] === 'classical'"
+                        (click)="selectOption('q4', 'classical')">
+                        <span class="option-icon">🎻</span>
+                        <span class="option-label">Classical / Jazz</span>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Question 5 -->
+            <div class="question-step" *ngIf="currentStep === 5">
+                <h2>Favorite Season?</h2>
+                <p class="subtitle">The weather that matches your soul.</p>
+                <div class="options-grid">
+                    <label class="option-card" [class.selected]="answers['q5'] === 'spring'"
+                        (click)="selectOption('q5', 'spring')">
+                        <span class="option-icon">🌱</span>
+                        <span class="option-label">Spring</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q5'] === 'summer'"
+                        (click)="selectOption('q5', 'summer')">
+                        <span class="option-icon">☀️</span>
+                        <span class="option-label">Summer</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q5'] === 'autumn'"
+                        (click)="selectOption('q5', 'autumn')">
+                        <span class="option-icon">🍁</span>
+                        <span class="option-label">Autumn</span>
+                    </label>
+                    <label class="option-card" [class.selected]="answers['q5'] === 'winter'"
+                        (click)="selectOption('q5', 'winter')">
+                        <span class="option-icon">❄️</span>
+                        <span class="option-label">Winter</span>
+                    </label>
+                </div>
+            </div>
+
+            <button type="button" class="btn-next" [disabled]="!canProceed()" (click)="nextStep()">
+                {{ currentStep === totalSteps ? 'Reveal My Vibe' : 'Next Question' }}
+            </button>
+        </div>
+
+        <!-- Result Screen -->
+        <div class="result-screen" *ngIf="showResult">
+            <span class="result-icon">✨</span>
+            <h2>Vibe Check Complete!</h2>
+            <div class="vibe-tag">{{ calculatedVibe }}</div>
+            <p class="subtitle">We've curated a personalized shopping feed just for you based on your unique vibe.</p>
+            <button class="btn-next" [routerLink]="['/shop']" [queryParams]="{vibe: calculatedVibe}">Shop My
+                Vibe</button>
+        </div>
+    </div>
+</div>
+
+<!-- Login Modal Overlay (Simple implementation) -->
+<div *ngIf="!isLoggedIn" class="modal-overlay">
+    <div class="modal-content">
+        <div style="font-size: 48px; margin-bottom: 20px;">🔒</div>
+        <h2>Please Login First</h2>
+        <p>To get your personalized vibe reading, we need to know who you are!</p>
+        <button class="btn-primary" routerLink="/auth/login">Log In / Sign Up</button>
+    </div>
+</div>

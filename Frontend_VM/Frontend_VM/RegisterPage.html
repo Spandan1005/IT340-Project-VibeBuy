@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<!--Push from VM1-->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>VibeBuy - Login</title>
+    <title>VibeBuy - Register</title>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
@@ -28,7 +28,7 @@
         .login-left {
             flex: 1;
             background: linear-gradient(135deg, rgba(168, 85, 247, 0.9), rgba(236, 72, 153, 0.9)),
-                url('https://images.unsplash.com/photo-1441986300917-64674bd600d8?w=1200&q=80');
+                url('https://images.unsplash.com/photo-1483985988355-763728e1935b?w=1200&q=80');
             background-size: cover;
             background-position: center;
             display: flex;
@@ -83,7 +83,7 @@
         }
 
         .logo-section {
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .logo {
@@ -114,7 +114,7 @@
         .login-form {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 16px;
         }
 
         .form-group {
@@ -123,27 +123,10 @@
             gap: 8px;
         }
 
-        .label-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
         label {
             font-size: 14px;
             font-weight: 600;
             color: #1a1a1a;
-        }
-
-        .forgot-link {
-            font-size: 14px;
-            color: #a855f7;
-            text-decoration: none;
-            font-weight: 500;
-        }
-
-        .forgot-link:hover {
-            text-decoration: underline;
         }
 
         .input-wrapper {
@@ -235,54 +218,6 @@
             cursor: not-allowed;
         }
 
-        .divider {
-            display: flex;
-            align-items: center;
-            text-align: center;
-            margin: 24px 0;
-            color: #999;
-        }
-
-        .divider::before,
-        .divider::after {
-            content: '';
-            flex: 1;
-            border-bottom: 1px solid #e5e5e5;
-        }
-
-        .divider span {
-            padding: 0 16px;
-            font-size: 14px;
-        }
-
-        .btn-google {
-            width: 100%;
-            padding: 14px;
-            background: white;
-            color: #1a1a1a;
-            border: 2px solid #e5e5e5;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            font-family: inherit;
-        }
-
-        .btn-google:hover {
-            background: #f9f9f9;
-            border-color: #d5d5d5;
-        }
-
-        .btn-google svg {
-            width: 20px;
-            height: 20px;
-        }
-
         .signup-link {
             text-align: center;
             margin-top: 24px;
@@ -326,10 +261,6 @@
             .overlay-content h1 {
                 font-size: 36px;
             }
-
-            .overlay-content p {
-                font-size: 18px;
-            }
         }
     </style>
 </head>
@@ -338,8 +269,8 @@
     <div class="login-container">
         <div class="login-left">
             <div class="overlay-content">
-                <h1>Shopping that feels like you</h1>
-                <p>Discover products tailored to your unique vibe, mood, and lifestyle.</p>
+                <h1>Join the Vibe</h1>
+                <p>Create an account to start your personalized shopping experience today.</p>
             </div>
         </div>
 
@@ -356,10 +287,22 @@
                     </div>
                 </div>
 
-                <h2>Welcome back</h2>
-                <p class="subtitle">Sign in to continue your personalized shopping journey</p>
+                <h2>Create an account</h2>
+                <p class="subtitle">Enter your details to get started</p>
 
-                <form class="login-form" id="loginForm">
+                <form class="login-form" id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="12" cy="7" r="4"></circle>
+                            </svg>
+                            <input type="text" id="name" name="name" placeholder="John Doe" required />
+                        </div>
+                    </div>
+
                     <div class="form-group">
                         <label for="email">Email</label>
                         <div class="input-wrapper">
@@ -374,10 +317,7 @@
                     </div>
 
                     <div class="form-group">
-                        <div class="label-row">
-                            <label for="password">Password</label>
-                            <a href="#" class="forgot-link">Forgot password?</a>
-                        </div>
+                        <label for="password">Password</label>
                         <div class="input-wrapper">
                             <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
                                 stroke-width="2">
@@ -388,43 +328,37 @@
                         </div>
                     </div>
 
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password</label>
+                        <div class="input-wrapper">
+                            <svg class="input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                            </svg>
+                            <input type="password" id="confirmPassword" name="confirmPassword" placeholder="••••••••"
+                                required />
+                        </div>
+                    </div>
+
                     <div class="error-message" id="errorMessage"></div>
                     <div class="success-message" id="successMessage"></div>
 
                     <button type="submit" class="btn-primary" id="submitBtn">
-                        Sign in
-                    </button>
-
-                    <div class="divider">
-                        <span>or</span>
-                    </div>
-
-                    <button type="button" class="btn-google" id="googleBtn">
-                        <svg viewBox="0 0 24 24">
-                            <path fill="#4285F4"
-                                d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z" />
-                            <path fill="#34A853"
-                                d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" />
-                            <path fill="#FBBC05"
-                                d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z" />
-                            <path fill="#EA4335"
-                                d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z" />
-                        </svg>
-                        Continue with Google
+                        Create Account
                     </button>
                 </form>
 
                 <p class="signup-link">
-                    New to VibeBuy? <a href="RegisterPage.html">Create an account</a>
+                    Already have an account? <a href="LoginPage.html">Sign in</a>
                 </p>
             </div>
         </div>
     </div>
 
     <script>
-        const loginForm = document.getElementById('loginForm');
+        const registerForm = document.getElementById('registerForm');
         const submitBtn = document.getElementById('submitBtn');
-        const googleBtn = document.getElementById('googleBtn');
         const errorMessage = document.getElementById('errorMessage');
         const successMessage = document.getElementById('successMessage');
 
@@ -440,86 +374,71 @@
             errorMessage.classList.remove('show');
         }
 
-        async function handleLogin() {
+        async function handleRegister() {
+            const name = document.getElementById('name').value;
             const email = document.getElementById('email').value;
             const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
 
             // Hide previous messages
             errorMessage.classList.remove('show');
             successMessage.classList.remove('show');
 
             // Validate
-            if (!email || !password) {
+            if (!name || !email || !password || !confirmPassword) {
                 showError('Please fill in all fields');
-                return false;
+                return;
+            }
+
+            if (password.length < 6) {
+                showError('Password must be at least 6 characters');
+                return;
+            }
+
+            if (password !== confirmPassword) {
+                showError('Passwords do not match');
+                return;
             }
 
             // Disable button
             submitBtn.disabled = true;
-            submitBtn.textContent = 'Signing in...';
+            submitBtn.textContent = 'Creating Account...';
 
             try {
                 // [BACKEND_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Backend VM
-                const response = await fetch('http://100.105.55.118:5000/api/login', {
+                const backendUrl = 'http://192.168.10.20:5000/api/register';
+
+                const response = await fetch(backendUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email, password })
+                    body: JSON.stringify({ name, email, password })
                 });
 
                 const data = await response.json();
 
                 if (response.ok) {
-                    // Store user info
-                    localStorage.setItem('isLoggedIn', 'true');
-                    localStorage.setItem('userId', data.user.id);
-                    localStorage.setItem('userEmail', data.user.email);
-
-                    // Redirect to MFA page
-                    window.location.href = 'MfaPage.html';
+                    showSuccess('Account created successfully! Redirecting to login...');
+                    setTimeout(() => {
+                        window.location.href = 'LoginPage.html';
+                    }, 2000);
                 } else {
-                    showError(data.message || 'Login failed');
+                    showError(data.message || 'Registration failed');
                     submitBtn.disabled = false;
-                    submitBtn.textContent = 'Sign in';
+                    submitBtn.textContent = 'Create Account';
                 }
             } catch (err) {
                 showError('Server error. Please try again later.');
                 console.error(err);
                 submitBtn.disabled = false;
-                submitBtn.textContent = 'Sign in';
+                submitBtn.textContent = 'Create Account';
             }
-
-            return false;
         }
 
-        // Handle form submission
-        loginForm.addEventListener('submit', function (e) {
+        registerForm.addEventListener('submit', function (e) {
             e.preventDefault();
-            handleLogin();
-        });
-
-        // Also add click handler to button
-        submitBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            handleLogin();
-        });
-
-        // Handle Google login
-        googleBtn.addEventListener('click', function () {
-            showError('Google OAuth integration coming soon! This is a demo.');
-        });
-
-        // Handle forgot password link
-        document.querySelector('.forgot-link').addEventListener('click', function (e) {
-            e.preventDefault();
-            showError('Password reset feature coming soon! This is a demo.');
-        });
-
-        // Handle create account link
-        document.querySelector('.signup-link a').addEventListener('click', function (e) {
-            e.preventDefault();
-            showError('Registration page coming soon! This is a demo.');
+            handleRegister();
         });
     </script>
 </body>

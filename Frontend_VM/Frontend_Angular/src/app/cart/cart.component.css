@@ -1,0 +1,236 @@
+.cart-container {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+    font-family: 'Inter', sans-serif;
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 2rem;
+    color: #333;
+}
+
+.empty-cart {
+    text-align: center;
+    padding: 3rem;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+}
+
+.btn-shop {
+    display: inline-block;
+    margin-top: 1rem;
+    padding: 0.75rem 1.5rem;
+    background: #A855F7;
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: background 0.2s;
+}
+
+.btn-shop:hover {
+    background: #9333EA;
+}
+
+.cart-content {
+    display: grid;
+    grid-template-columns: 1fr 300px;
+    gap: 2rem;
+}
+
+@media (max-width: 768px) {
+    .cart-content {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* Cart Items */
+.cart-items {
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+}
+
+.cart-item {
+    display: flex;
+    align-items: center;
+    padding: 1.5rem;
+    border-bottom: 1px solid #eee;
+    gap: 1.5rem;
+}
+
+.cart-item:last-child {
+    border-bottom: none;
+}
+
+.item-image {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+.item-details {
+    flex: 1;
+}
+
+.item-details h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+}
+
+.item-price {
+    color: #666;
+    margin: 0;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    background: #f3f4f6;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 0.5rem;
+}
+
+.quantity-controls button {
+    border: none;
+    background: none;
+    padding: 0.5rem 0.75rem;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.quantity-controls button:hover {
+    background: #e5e7eb;
+}
+
+.quantity-controls span {
+    padding: 0 0.5rem;
+    font-weight: 500;
+}
+
+.btn-remove {
+    background: none;
+    border: none;
+    color: #ef4444;
+    font-size: 0.9rem;
+    cursor: pointer;
+    padding: 0;
+}
+
+.btn-remove:hover {
+    text-decoration: underline;
+}
+
+.item-total {
+    font-weight: bold;
+    font-size: 1.1rem;
+    min-width: 80px;
+    text-align: right;
+}
+
+/* Cart Summary */
+.cart-summary {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.cart-summary h2 {
+    margin-top: 0;
+}
+
+.total-amount {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #A855F7;
+    margin: 1rem 0;
+}
+
+.btn-checkout {
+    width: 100%;
+    padding: 1rem;
+    background: #A855F7;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+}
+
+.btn-checkout:hover {
+    background: #9333EA;
+}
+
+/* Checkout Section */
+.checkout-section {
+    grid-column: 1 / -1;
+    background: white;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+    margin-top: 2rem;
+}
+
+.form-group {
+    margin-bottom: 1.5rem;
+}
+
+.form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1.5rem;
+}
+
+label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: #374151;
+}
+
+input {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #d1d5db;
+    border-radius: 6px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+input:focus {
+    outline: none;
+    border-color: #A855F7;
+    box-shadow: 0 0 0 2px rgba(168, 85, 247, 0.2);
+}
+
+.btn-place-order {
+    width: 100%;
+    padding: 1rem;
+    background: #10b981;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 1rem;
+}
+
+.btn-place-order:hover {
+    background: #059669;
+}
+
+.btn-place-order:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}

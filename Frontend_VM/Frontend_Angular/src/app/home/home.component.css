@@ -1,0 +1,215 @@
+/* Hero Section */
+.hero {
+    background: linear-gradient(135deg, rgba(168, 85, 247, 0.1), rgba(236, 72, 153, 0.1));
+    padding: 100px 60px;
+    text-align: center;
+}
+
+.hero-content {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.hero h1 {
+    font-size: 56px;
+    font-weight: 700;
+    color: #1a1a1a;
+    margin-bottom: 24px;
+    line-height: 1.2;
+}
+
+.hero p {
+    font-size: 20px;
+    color: #666;
+    margin-bottom: 40px;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    padding: 16px 48px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(168, 85, 247, 0.3);
+}
+
+/* Features Section */
+.features {
+    padding: 80px 60px;
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.features h2 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: #1a1a1a;
+}
+
+.feature-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 40px;
+}
+
+.feature-card {
+    background: white;
+    padding: 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+    transition: transform 0.3s;
+}
+
+.feature-card:hover {
+    transform: translateY(-5px);
+}
+
+.feature-icon {
+    width: 80px;
+    height: 80px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 24px;
+}
+
+.feature-card h3 {
+    font-size: 24px;
+    margin-bottom: 16px;
+    color: #1a1a1a;
+}
+
+.feature-card p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* How It Works Section */
+.how-it-works {
+    background: white;
+    padding: 80px 60px;
+}
+
+.how-it-works-content {
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+.how-it-works h2 {
+    text-align: center;
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 60px;
+    color: #1a1a1a;
+}
+
+.steps {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 40px;
+}
+
+.step {
+    text-align: center;
+}
+
+.step-number {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 700;
+    margin: 0 auto 20px;
+}
+
+.step h3 {
+    font-size: 20px;
+    margin-bottom: 12px;
+    color: #1a1a1a;
+}
+
+.step p {
+    color: #666;
+    line-height: 1.6;
+}
+
+/* CTA Section */
+.cta {
+    background: linear-gradient(135deg, #a855f7, #ec4899);
+    padding: 80px 60px;
+    text-align: center;
+    color: white;
+}
+
+.cta h2 {
+    font-size: 40px;
+    font-weight: 700;
+    margin-bottom: 20px;
+}
+
+.cta p {
+    font-size: 20px;
+    margin-bottom: 40px;
+    opacity: 0.9;
+}
+
+.btn-secondary {
+    padding: 16px 48px;
+    background: white;
+    color: #a855f7;
+    border: none;
+    border-radius: 8px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-secondary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+    .hero {
+        padding: 60px 24px;
+    }
+
+    .hero h1 {
+        font-size: 36px;
+    }
+
+    .features,
+    .how-it-works {
+        padding: 60px 24px;
+    }
+
+    .features h2,
+    .how-it-works h2,
+    .cta h2 {
+        font-size: 32px;
+    }
+}
