@@ -1,0 +1,13 @@
+{
+    "name": "devops-log-collector",
+    "version": "1.0.0",
+    "description": "Simple log collector for IT340 VibeBuy Project",
+    "main": "server.js",
+    "scripts": {
+        "start": "node server.js"
+    },
+    "dependencies": {
+        "cors": "^2.8.5",
+        "express": "^4.18.2"
+    }
+}
