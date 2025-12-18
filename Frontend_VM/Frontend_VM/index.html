@@ -1,7 +1,6 @@
-
 <!DOCTYPE html>
-<!--Push from VM1-->
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -323,38 +322,138 @@
             <div class="logo">
                 <svg width="32" height="32" viewBox="0 0 32 32" fill="none">
                     <circle cx="16" cy="16" r="16" fill="#A855F7" />
+                    <path d="M16 8L20 12L16 16L12 12L16 8Z" fill="white" />
+                    <path d="M16 16L20 20L16 24L12 20L16 16Z" fill="white" />
+                </svg>
+                <span>VibeBuy</span>
+            </div>
+            <div class="nav-links">
+                <a href="#">Shop</a>
+                <a href="#">Categories</a>
+                <a href="#">About</a>
+                <a href="LoginPage.html" class="btn-login" id="authButton">Login</a>
+            </div>
+        </nav>
+    </header>
 
-                    <!-- JavaScript for Login Detection -->
-                    <script>
-                        // Check if user is logged in
-                        window.addEventListener('DOMContentLoaded', function () {
-                            const isLoggedIn = localStorage.getItem('isLoggedIn');
-                            const userEmail = localStorage.getItem('userEmail');
-                            const authButton = document.getElementById('authButton');
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Shopping that feels like you</h1>
+            <p>Discover products tailored to your unique vibe, mood, and lifestyle. AI-powered recommendations that get
+                you.</p>
+            <button class="btn-primary" onclick="window.location.href='ShopPage.html?vibe=all'">Start Shopping</button>
+        </div>
+    </section>
 
-                            if (isLoggedIn === 'true' && userEmail) {
-                                // User is logged in - show welcome message and logout button
-                                authButton.textContent = 'Logout';
-                                authButton.onclick = function (e) {
-                                    e.preventDefault();
-                                    // Clear login data
-                                    localStorage.removeItem('isLoggedIn');
-                                    localStorage.removeItem('userEmail');
-                                    // Show alert
-                                    alert('You have been logged out!');
-                                    // Reload page
-                                    location.reload();
-                                };
+    <!-- Features Section -->
+    <section class="features">
+        <h2>Why VibeBuy?</h2>
+        <div class="feature-grid">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm0 18a8 8 0 1 1 8-8 8 8 0 0 1-8 8z" />
+                        <path d="M12 6v6l4 2" />
+                    </svg>
+                </div>
+                <h3>Real-time Trends</h3>
+                <p>Stay ahead of the curve with products that are trending right now.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path
+                            d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z" />
+                    </svg>
+                </div>
+                <h3>AI Personalization</h3>
+                <p>Our smart algorithms learn your style to show you items you'll love.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="white" stroke-width="2">
+                        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
+                    </svg>
+                </div>
+                <h3>Secure Shopping</h3>
+                <p>Shop with confidence knowing your data and transactions are protected.</p>
+            </div>
+        </div>
+    </section>
 
-                                // Update hero section to show personalized message
-                                const heroContent = document.querySelector('.hero-content h1');
-                                if (heroContent) {
-                                    heroContent.textContent = 'Welcome back, ' + userEmail.split('@')[0] + '!';
-                                }
-                                const heroText = document.querySelector('.hero-content p');
-                                if (heroText) {
-                                    heroText.textContent = 'Ready to discover products tailored to your vibe today?';
-                                }
-                            }
-                        });
-                    </script>
+    <!-- How It Works Section -->
+    <section class="how-it-works">
+        <div class="how-it-works-content">
+            <h2>How It Works</h2>
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Create Profile</h3>
+                    <p>Sign up and tell us a bit about your style preferences.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Get Matched</h3>
+                    <p>We curate a personalized feed of products just for you.</p>
+                </div>
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Shop & Vibe</h3>
+                    <p>Buy what you love and we'll refine our recommendations.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to find your vibe?</h2>
+        <p>Join thousands of shoppers finding their perfect match today.</p>
+        <button class="btn-secondary" onclick="window.location.href='QuizPage.html'">Get Started Now</button>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2025 VibeBuy. All rights reserved.</p>
+    </footer>
+
+    <!-- Script -->
+    <script>
+        // Check if user is logged in
+        window.addEventListener('DOMContentLoaded', function () {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const userEmail = localStorage.getItem('userEmail');
+            const authButton = document.getElementById('authButton');
+
+            if (isLoggedIn === 'true' && userEmail) {
+                // User is logged in - show welcome message and logout button
+                authButton.textContent = 'Logout';
+                authButton.href = "#"; // Prevent navigation
+                authButton.onclick = function (e) {
+                    e.preventDefault();
+                    // Clear login data
+                    localStorage.removeItem('isLoggedIn');
+                    localStorage.removeItem('userEmail');
+                    localStorage.removeItem('userId');
+                    // Show alert
+                    alert('You have been logged out!');
+                    // Reload page
+                    location.reload();
+                };
+
+                // Update hero section to show personalized message
+                const heroContent = document.querySelector('.hero-content h1');
+                if (heroContent) {
+                    heroContent.textContent = 'Welcome back, ' + userEmail.split('@')[0] + '!';
+                }
+                const heroText = document.querySelector('.hero-content p');
+                if (heroText) {
+                    heroText.textContent = 'Ready to discover products tailored to your vibe today?';
+                }
+            }
+        });
+    </script>
+</body>
+
+</html>

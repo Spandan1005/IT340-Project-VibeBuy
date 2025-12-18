@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeBuy - Find Your Vibe</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #faf8f9;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .quiz-container {
+            background: white;
+            max-width: 600px;
+            width: 100%;
+            border-radius: 24px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .progress-bar {
+            height: 6px;
+            background: #f0f0f0;
+            width: 100%;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #a855f7, #ec4899);
+            width: 0%;
+            transition: width 0.4s ease;
+        }
+
+        .quiz-content {
+            padding: 40px;
+        }
+
+        .question-step {
+            display: none;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question-step.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h2 {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 12px;
+        }
+
+        p.subtitle {
+            color: #666;
+            margin-bottom: 32px;
+            font-size: 16px;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .option-card {
+            border: 2px solid #e5e5e5;
+            border-radius: 16px;
+            padding: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: center;
+        }
+
+        .option-card:hover {
+            border-color: #a855f7;
+            background: #fdf4ff;
+        }
+
+        .option-card.selected {
+            border-color: #a855f7;
+            background: #fdf4ff;
+            box-shadow: 0 0 0 4px rgba(168, 85, 247, 0.1);
+        }
+
+        .option-icon {
+            font-size: 32px;
+            margin-bottom: 12px;
+            display: block;
+        }
+
+        .option-label {
+            font-weight: 600;
+            color: #1a1a1a;
+        }
+
+        .btn-next {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 32px;
+            transition: opacity 0.3s;
+        }
+
+        .btn-next:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* Result Screen */
+        .result-screen {
+            text-align: center;
+            display: none;
+        }
+
+        .result-icon {
+            font-size: 64px;
+            margin-bottom: 24px;
+            display: inline-block;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateY(0);
+            }
+
+            40% {
+                transform: translateY(-20px);
+            }
+
+            60% {
+                transform: translateY(-10px);
+            }
+        }
+
+        .vibe-tag {
+            display: inline-block;
+            padding: 8px 24px;
+            background: #f3e8ff;
+            color: #a855f7;
+            border-radius: 100px;
+            font-weight: 600;
+            margin-bottom: 24px;
+        }
+
+        @media (max-width: 640px) {
+            .options-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .quiz-content {
+                padding: 24px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div class="quiz-container">
+        <div class="progress-bar">
+            <div class="progress-fill" id="progress"></div>
+        </div>
+
+        <div class="quiz-content">
+            <form id="quizForm">
+                <!-- Question 1 -->
+                <div class="question-step active" data-step="1">
+                    <h2>How are you feeling right now?</h2>
+                    <p class="subtitle">Let's start with your current mood.</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="chill" hidden>
+                            <span class="option-icon">😌</span>
+                            <span class="option-label">Chill & Relaxed</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="energetic" hidden>
+                            <span class="option-icon">⚡</span>
+                            <span class="option-label">Energetic</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="focused" hidden>
+                            <span class="option-icon">🎯</span>
+                            <span class="option-label">Focused</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q1" value="adventurous" hidden>
+                            <span class="option-icon">🏔️</span>
+                            <span class="option-label">Adventurous</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 2 -->
+                <div class="question-step" data-step="2">
+                    <h2>Pick your ideal weekend activity</h2>
+                    <p class="subtitle">What sounds like the most fun?</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="nature" hidden>
+                            <span class="option-icon">🌲</span>
+                            <span class="option-label">Hiking in Nature</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="gaming" hidden>
+                            <span class="option-icon">🎮</span>
+                            <span class="option-label">Gaming Marathon</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="social" hidden>
+                            <span class="option-icon">🎉</span>
+                            <span class="option-label">Party with Friends</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q2" value="creative" hidden>
+                            <span class="option-icon">🎨</span>
+                            <span class="option-label">Creative Project</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 3 -->
+                <div class="question-step" data-step="3">
+                    <h2>Choose an aesthetic</h2>
+                    <p class="subtitle">Which color palette speaks to you?</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="pastel" hidden>
+                            <span class="option-icon">🌸</span>
+                            <span class="option-label">Soft Pastels</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="neon" hidden>
+                            <span class="option-icon">🌆</span>
+                            <span class="option-label">Cyberpunk Neon</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="earth" hidden>
+                            <span class="option-icon">🍂</span>
+                            <span class="option-label">Earth Tones</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q3" value="mono" hidden>
+                            <span class="option-icon">🎱</span>
+                            <span class="option-label">Minimalist Mono</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 4 -->
+                <div class="question-step" data-step="4">
+                    <h2>What's playing in your headphones?</h2>
+                    <p class="subtitle">Your soundtrack defines your vibe.</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="lofi" hidden>
+                            <span class="option-icon">☕</span>
+                            <span class="option-label">Lo-Fi Beats</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="pop" hidden>
+                            <span class="option-icon">🎤</span>
+                            <span class="option-label">Top 40 Pop</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="rock" hidden>
+                            <span class="option-icon">🎸</span>
+                            <span class="option-label">Rock / Alt</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q4" value="classical" hidden>
+                            <span class="option-icon">🎻</span>
+                            <span class="option-label">Classical / Jazz</span>
+                        </label>
+                    </div>
+                </div>
+
+                <!-- Question 5 -->
+                <div class="question-step" data-step="5">
+                    <h2>Favorite Season?</h2>
+                    <p class="subtitle">The weather that matches your soul.</p>
+                    <div class="options-grid">
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="spring" hidden>
+                            <span class="option-icon">🌱</span>
+                            <span class="option-label">Spring</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="summer" hidden>
+                            <span class="option-icon">☀️</span>
+                            <span class="option-label">Summer</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="autumn" hidden>
+                            <span class="option-icon">🍁</span>
+                            <span class="option-label">Autumn</span>
+                        </label>
+                        <label class="option-card">
+                            <input type="radio" name="q5" value="winter" hidden>
+                            <span class="option-icon">❄️</span>
+                            <span class="option-label">Winter</span>
+                        </label>
+                    </div>
+                </div>
+
+                <button type="button" class="btn-next" id="nextBtn" disabled>Next Question</button>
+            </form>
+
+            <!-- Result Screen -->
+            <div class="result-screen" id="resultScreen">
+                <span class="result-icon">✨</span>
+                <h2>Vibe Check Complete!</h2>
+                <div class="vibe-tag" id="vibeResult">Calculating...</div>
+                <p class="subtitle">We've curated a personalized shopping feed just for you based on your unique vibe.
+                </p>
+                <button class="btn-next"
+                    onclick="window.location.href='ShopPage.html?vibe=' + encodeURIComponent(document.getElementById('vibeResult').textContent)">Shop
+                    My Vibe</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const totalSteps = 5;
+        let currentStep = 1;
+        const nextBtn = document.getElementById('nextBtn');
+        const progressBar = document.getElementById('progress');
+        const form = document.getElementById('quizForm');
+
+        // Handle Option Selection
+        document.querySelectorAll('.option-card').forEach(card => {
+            card.addEventListener('click', function () {
+                // Remove selected class from siblings
+                const siblings = this.parentElement.querySelectorAll('.option-card');
+                siblings.forEach(s => s.classList.remove('selected'));
+
+                // Add selected class to clicked
+                this.classList.add('selected');
+
+                // Select radio input
+                const input = this.querySelector('input');
+                input.checked = true;
+
+                // Enable next button
+                nextBtn.disabled = false;
+            });
+        });
+
+        // Handle Next Button
+        nextBtn.addEventListener('click', function () {
+            if (currentStep < totalSteps) {
+                // Hide current
+                document.querySelector(`.question-step[data-step="${currentStep}"]`).classList.remove('active');
+
+                // Increment
+                currentStep++;
+
+                // Show next
+                document.querySelector(`.question-step[data-step="${currentStep}"]`).classList.add('active');
+
+                // Update Progress
+                progressBar.style.width = `${((currentStep - 1) / totalSteps) * 100}%`;
+
+                // Reset Button
+                nextBtn.disabled = true;
+                if (currentStep === totalSteps) {
+                    nextBtn.textContent = "Reveal My Vibe";
+                }
+            } else {
+                // Finish
+                showResult();
+            }
+        });
+
+        function showResult() {
+            form.style.display = 'none';
+            document.getElementById('resultScreen').style.display = 'block';
+            progressBar.style.width = '100%';
+
+            // Calculate Vibe based on answers
+            const formData = new FormData(form);
+            const scores = {
+                'Chill Explorer': 0,
+                'Cyber Punk': 0,
+                'Cozy Minimalist': 0,
+                'Retro Soul': 0
+            };
+
+            // Map answers to vibes
+            const mappings = {
+                // Q1: Mood
+                'chill': 'Chill Explorer',
+                'energetic': 'Cyber Punk',
+                'focused': 'Cozy Minimalist',
+                'adventurous': 'Retro Soul',
+
+                // Q2: Weekend
+                'nature': 'Chill Explorer',
+                'gaming': 'Cyber Punk',
+                'social': 'Retro Soul',
+                'creative': 'Cozy Minimalist',
+
+                // Q3: Aesthetic
+                'pastel': 'Cozy Minimalist',
+                'neon': 'Cyber Punk',
+                'earth': 'Chill Explorer',
+                'mono': 'Retro Soul',
+
+                // Q4: Music
+                'lofi': 'Chill Explorer',
+                'pop': 'Retro Soul',
+                'rock': 'Cyber Punk',
+                'classical': 'Cozy Minimalist',
+
+                // Q5: Season
+                'spring': 'Cozy Minimalist',
+                'summer': 'Retro Soul',
+                'autumn': 'Chill Explorer',
+                'winter': 'Cyber Punk'
+            };
+
+            // Tally scores
+            for (let [key, value] of formData.entries()) {
+                const vibe = mappings[value];
+                if (vibe) {
+                    scores[vibe]++;
+                }
+            }
+
+            // Find winner
+            let maxScore = -1;
+            let winner = 'Chill Explorer'; // Default
+
+            for (const [vibe, score] of Object.entries(scores)) {
+                if (score > maxScore) {
+                    maxScore = score;
+                    winner = vibe;
+                } else if (score === maxScore) {
+                    // Tie-breaker: Randomly pick one of the tied winners (simplified)
+                    if (Math.random() > 0.5) {
+                        winner = vibe;
+                    }
+                }
+            }
+
+            document.getElementById('vibeResult').textContent = winner;
+        }
+
+        // Initialize Progress
+        progressBar.style.width = '0%';
+
+        // Login Check
+        window.addEventListener('DOMContentLoaded', function () {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            if (isLoggedIn !== 'true') {
+                // Create and show modal
+                const modal = document.createElement('div');
+                modal.style.cssText = `
+                    position: fixed;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background: rgba(0,0,0,0.5);
+                    backdrop-filter: blur(5px);
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    z-index: 1000;
+                    animation: fadeIn 0.3s ease;
+                `;
+
+                modal.innerHTML = `
+                    <div style="background: white; padding: 40px; border-radius: 24px; max-width: 400px; width: 90%; text-align: center; box-shadow: 0 20px 60px rgba(0,0,0,0.1);">
+                        <div style="font-size: 48px; margin-bottom: 20px;">🔒</div>
+                        <h2 style="margin-bottom: 12px; font-size: 24px;">Please Login First</h2>
+                        <p style="color: #666; margin-bottom: 32px; line-height: 1.5;">To get your personalized vibe reading, we need to know who you are!</p>
+                        <button onclick="window.location.href='LoginPage.html'" style="
+                            background: linear-gradient(135deg, #a855f7, #ec4899);
+                            color: white;
+                            border: none;
+                            padding: 14px 32px;
+                            border-radius: 12px;
+                            font-size: 16px;
+                            font-weight: 600;
+                            cursor: pointer;
+                            width: 100%;
+                            transition: transform 0.2s;
+                        " onmouseover="this.style.transform='scale(1.02)'" onmouseout="this.style.transform='scale(1)'">Log In / Sign Up</button>
+                    </div>
+                `;
+
+                document.body.appendChild(modal);
+
+                // Prevent interaction with background
+                document.querySelector('.quiz-container').style.filter = 'blur(5px)';
+                document.querySelector('.quiz-container').style.pointerEvents = 'none';
+            }
+        });
+    </script>
+</body>
+
+</html>

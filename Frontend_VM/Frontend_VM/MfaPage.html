@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VibeBuy - MFA Setup</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            background: #faf8f9;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+
+        .mfa-container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+            width: 100%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1a1a1a;
+            margin-bottom: 16px;
+        }
+
+        p {
+            color: #666;
+            font-size: 14px;
+            margin-bottom: 24px;
+            line-height: 1.5;
+        }
+
+        .qr-code-container {
+            margin-bottom: 24px;
+            padding: 16px;
+            border: 2px dashed #e5e5e5;
+            border-radius: 8px;
+            display: inline-block;
+        }
+
+        .qr-code-container img {
+            max-width: 200px;
+            display: block;
+        }
+
+        .input-wrapper {
+            margin-bottom: 24px;
+        }
+
+        input {
+            width: 100%;
+            padding: 14px;
+            border: 2px solid #e5e5e5;
+            border-radius: 8px;
+            font-size: 18px;
+            text-align: center;
+            letter-spacing: 4px;
+            transition: all 0.3s ease;
+            font-family: monospace;
+        }
+
+        input:focus {
+            outline: none;
+            border-color: #a855f7;
+            box-shadow: 0 0 0 3px rgba(168, 85, 247, 0.1);
+        }
+
+        .btn-primary {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #a855f7, #ec4899);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(168, 85, 247, 0.3);
+        }
+
+        .error-message {
+            color: #c33;
+            font-size: 14px;
+            margin-top: 16px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mfa-container">
+        <h1>Two-Factor Auth</h1>
+        <p>Scan this QR code with your Google Authenticator app, then enter the 6-digit code below.</p>
+
+        <div class="qr-code-container" id="qrContainer">
+            <p>Loading QR Code...</p>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="text" id="token" placeholder="000000" maxlength="6" pattern="\d*">
+        </div>
+
+        <button class="btn-primary" id="verifyBtn">Verify Code</button>
+        <div class="error-message" id="errorMessage"></div>
+    </div>
+
+    <script>
+        const userId = localStorage.getItem('userId');
+        const qrContainer = document.getElementById('qrContainer');
+        const tokenInput = document.getElementById('token');
+        const verifyBtn = document.getElementById('verifyBtn');
+        const errorMessage = document.getElementById('errorMessage');
+
+        // [BACKEND_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Backend VM
+        const BACKEND_URL = 'http://192.168.10.20:5000';
+
+        if (!userId) {
+            window.location.href = 'LoginPage.html';
+        }
+
+        // Fetch QR Code on Load
+        async function setupMFA() {
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/mfa/setup`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    qrContainer.innerHTML = `<img src="${data.qrCode}" alt="MFA QR Code">`;
+                } else {
+                    errorMessage.textContent = 'Failed to load QR code';
+                    errorMessage.classList.add('show');
+                }
+            } catch (err) {
+                console.error(err);
+                errorMessage.textContent = 'Server error';
+                errorMessage.classList.add('show');
+            }
+        }
+
+        // Verify Token
+        async function verifyMFA() {
+            const token = tokenInput.value;
+            if (token.length !== 6) return;
+
+            verifyBtn.disabled = true;
+            verifyBtn.textContent = 'Verifying...';
+
+            try {
+                const response = await fetch(`${BACKEND_URL}/api/mfa/verify`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ userId, token })
+                });
+                const data = await response.json();
+
+                if (response.ok) {
+                    window.location.href = 'index.html';
+                } else {
+                    errorMessage.textContent = data.message || 'Invalid code';
+                    errorMessage.classList.add('show');
+                    verifyBtn.disabled = false;
+                    verifyBtn.textContent = 'Verify Code';
+                }
+            } catch (err) {
+                console.error(err);
+                errorMessage.textContent = 'Server error';
+                errorMessage.classList.add('show');
+                verifyBtn.disabled = false;
+                verifyBtn.textContent = 'Verify Code';
+            }
+        }
+
+        verifyBtn.addEventListener('click', verifyMFA);
+        setupMFA();
+    </script>
+</body>
+
+</html>
