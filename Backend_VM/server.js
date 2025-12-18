@@ -8,16 +8,16 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 5000;
 
-// const mongoSanitize = require('express-mongo-sanitize');
+const mongoSanitize = require('express-mongo-sanitize');
 
 // Middleware
 app.use(cors());
 app.use(express.json());
-// app.use(mongoSanitize());
+app.use(mongoSanitize());
 
 // MongoDB Connection
 // [DATABASE_VM_IP_ADDRESS]: Replace 'localhost' with the actual IP of the Database VM
-const mongoURI = process.env.MONGODB_URI || 'mongodb://localhost:27017/vibebuy';
+const mongoURI = process.env.MONGODB_URI || 'mongodb://192.168.10.30:27017/vibebuy';
 
 mongoose.connect(mongoURI, {
     useNewUrlParser: true,
